@@ -6,12 +6,14 @@ parser = argparse.ArgumentParser(description="None")
 parser.add_argument("-I", "--input",required=True, nargs="+", type=str, help="None")
 parser.add_argument("-R", "--reference", required=True, type=str, help="None")
 parser.add_argument("-N", "--name", required=False, type=str, help="None")
+parser.add_argument("-O", "--outdir", required=False, type=str, help="None")
 args = parser.parse_args()
 
 
 INPUT = args.input
 REFERENCE = args.reference
 NAME = args.name
+OUTDIR = args.outdir
 
 FORWARD = INPUT[0]
 REVERSE = INPUT[1] 
@@ -26,7 +28,7 @@ long_read= f"""
 		-R "@RG\tID:group1\tLB:lib1\tPL:illumina\tPU:unit1\tSM:sample1" \
 		{FORWARD} \
 		{REVERSE} \
-		> {SAM_FILE} \
+		> {OUTDIR}/{SAM_FILE} \
 	2>> "$LOG
 """
 
@@ -36,7 +38,7 @@ short_read = f"""
 		{REFERENCE} \
 		{FORWARD} \
 		{REVERSE} \
-		> {SAM_FILE} \
+		> {OUTDIR}/{SAM_FILE} \
 	2>> /home/lknq/KVM216_analysis/time.log
 """
 
