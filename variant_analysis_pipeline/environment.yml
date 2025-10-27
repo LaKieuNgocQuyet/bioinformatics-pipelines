@@ -1,0 +1,14 @@
+name: VariantCalling
+channels: 
+- conda-forge
+- bioconda
+- defaults
+dependencies:
+- cnvkit=0.9.12
+- python=3.10
+- bwa=0.7.19 
+- samtools=1.22.1 
+- gatk4=4.6.2.0 
+- snpeff=5.2  
+- snpsift=5.2 
+- seqtk=1.5
