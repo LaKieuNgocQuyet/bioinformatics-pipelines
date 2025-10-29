@@ -1,25 +1,25 @@
 import subprocess
 
-def baserecalibrator(known_sites_string, MARKED_BAM, REFERENCE, OUTDIR):
+def baserecalibrator(MARKED_BAM_FILE, known_sites_string, REFERENCE, SAMPLE_OUTDIR, OUTDIR):
     command = f"""
-    /usr/bin/time -v -o {OUTDIR}/runtime.log\
+    /usr/bin/time -v -a -o {OUTDIR}/runtime.log \
         gatk BaseRecalibrator \
-            -I {OUTDIR}/{MARKED_BAM} \
+            -I {SAMPLE_OUTDIR}/{MARKED_BAM_FILE} \
             -R {REFERENCE} \
             {known_sites_string} \
-            -O {OUTDIR}/recal_data.table \
+            -O {SAMPLE_OUTDIR}/recal_data.table \
     2>> {OUTDIR}/monitoring.log
     """
     subprocess.run(command, shell=True, check=True)
 
-def applyBQSR ( MARKED_BAM, REFERENCE, OUTDIR, RECAL_BAM):
+def applyBQSR ( MARKED_BAM_FILE, REFERENCE, SAMPLE_OUTDIR, OUTDIR, RECAL_BAM_FILE):
     command = f"""
-        /usr/bin/time -v -o {OUTDIR}/runtime.log\
+        /usr/bin/time -v -a -o {OUTDIR}/runtime.log \
             gatk ApplyBQSR \
-                -I {OUTDIR}/{MARKED_BAM} \
+                -I {SAMPLE_OUTDIR}/{MARKED_BAM_FILE} \
                 -R {REFERENCE} \
-                --bqsr-recal-file {OUTDIR}/recal_data.table \
-                -O {OUTDIR}/{RECAL_BAM} \
+                --bqsr-recal-file {SAMPLE_OUTDIR}/recal_data.table \
+                -O {SAMPLE_OUTDIR}/{RECAL_BAM_FILE} \
         2>> {OUTDIR}/monitoring.log
     """
     subprocess.run(command, shell=True, check=True)
