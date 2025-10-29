@@ -1,13 +1,14 @@
 #Please don't use tab characters for indentation in this file. Use spaces only.
 
 sample:
-  - id: sample1
-    read1: /path/to/sample1_R1.fastq
-    read2: /path/to/sample1_R2.fastq
-  - id: sample2
-    read1: /path/to/sample2_R1.fastq
-    read2: /path/to/sample2_R2.fastq
-    # You can add more samples as needed
+  - id: NF2_01
+    read1: /home/lknq/WES_samples/NF2_01/NF2_01_1.trim.fastq.gz
+    read2: /home/lknq/WES_samples/NF2_01/NF2_01_2.trim.fastq.gz
+  # You can add more samples as needed
+  # - id: sample2
+  #   read1: /path/to/sample2_R1.fastq
+  #   read2: /path/to/sample2_R2.fastq
+
 reference: 
   genome: /path/to/reference_genome.fasta
   known_site: 
