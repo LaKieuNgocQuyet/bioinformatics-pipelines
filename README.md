@@ -41,5 +41,5 @@ If you use GRCh37 human genome, run the folowing command in the terminal
 
 ```
 # License
-Licensed under the GPL-3.0. See the LICENSE.txt file.
+Licensed under the GPL-3.0. See the [LICENSE.txt](https://github.com/LaKieuNgocQuyet/variant_analysis_pipeline/blob/main/LICENSE) file.
 # References
