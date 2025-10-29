@@ -1,0 +1,3 @@
+from include.mapping_and_alignment.mapping_and_alignment_BWA_mem import mapping_and_alignment_BWA_mem
+from include.post_mapping_and_alignment.convert_and_sort import convert_and_sort
+from include.variant_calling.SNPs_and_Indels_GATK import SNPs_and_Indels_GATK
