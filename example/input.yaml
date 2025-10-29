@@ -10,10 +10,11 @@ sample:
   #   read2: /path/to/sample2_R2.fastq
 
 reference: 
-  genome: /path/to/reference_genome.fasta
+  genome: /home/lknq/hg19/hg19.p13.plusMT.no_alt_analysis_set.fa
   known_site: 
-    - /path/to/known_sites.vcf
-    - /path/to/another_known_sites.vcf
+    - /home/lknq/hg19_known-sites/1000G_omni2.5.hg19.sites.vcf /home/lknq/hg19_known-sites/dbsnp_138.hg19.vcf  
+    - /home/lknq/hg19_known-sites/Mills_and_1000G_gold_standard.indels.hg19.sites.vcf
+    - /home/lknq/hg19_known-sites/dbsnp_138.hg19.vcf
     # You can add more known sites as needed
 output: 
-  directory: /path/to/output_directory
+  directory: /home/lknq/GitHub/variant_analysis_pipeline/test
