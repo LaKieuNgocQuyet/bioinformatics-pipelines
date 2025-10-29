@@ -2,7 +2,7 @@ import subprocess
 
 def baserecalibrator(known_sites_string, MARKED_BAM, REFERENCE, OUTDIR):
     command = f"""
-    /usr/bin/time -v \
+    /usr/bin/time -v -o {OUTDIR}/runtime.log\
         gatk BaseRecalibrator \
             -I {OUTDIR}/{MARKED_BAM} \
             -R {REFERENCE} \
@@ -14,7 +14,7 @@ def baserecalibrator(known_sites_string, MARKED_BAM, REFERENCE, OUTDIR):
 
 def applyBQSR ( MARKED_BAM, REFERENCE, OUTDIR, RECAL_BAM):
     command = f"""
-        /usr/bin/time -v \
+        /usr/bin/time -v -o {OUTDIR}/runtime.log\
             gatk ApplyBQSR \
                 -I {OUTDIR}/{MARKED_BAM} \
                 -R {REFERENCE} \
