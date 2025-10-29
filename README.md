@@ -4,12 +4,12 @@ Pipeline for analyzing sequencing data
 *   Unix-like operating system (cannot run on Windows)
 *   Python >=3.10
 # Install
-### Using [Docker](https://www.docker.com/)
+### Method 1: Using [Docker](https://www.docker.com/) (recommended method)
 If you haven't installed Docker, please run the folowing command in the terminal
 ```
 sudo apt-get update
 ```
-### Build from source
+### Method 2: Build from source
 If you haven't had git, please run the folowing command in the terminal
 ```
 sudo apt-get update
