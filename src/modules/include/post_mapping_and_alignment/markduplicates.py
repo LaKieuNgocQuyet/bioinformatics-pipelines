@@ -1,12 +1,12 @@
 import subprocess
 
-def markduplicates(SORTED_BAM, OUTDIR, MARKED_BAM):
+def markduplicates(SORTED_BAM_FILE, SAMPLE_OUTDIR, OUTDIR, MARKED_BAM_FILE):
     command = f"""
-        /usr/bin/time -v -o {OUTDIR}/runtime.log\
+        /usr/bin/time -v -a -o {OUTDIR}/runtime.log \
             gatk MarkDuplicates \
-                -I {OUTDIR}/{SORTED_BAM} \
-                -O {OUTDIR}/{MARKED_BAM} \
-                -M {OUTDIR}/output.metrics.txt \
+                -I {SAMPLE_OUTDIR}/{SORTED_BAM_FILE} \
+                -O {SAMPLE_OUTDIR}/{MARKED_BAM_FILE} \
+                -M {SAMPLE_OUTDIR}/output.metrics.txt \
         2>> {OUTDIR}/monitoring.log
     """
     subprocess.run(command, shell=True, check=True)
