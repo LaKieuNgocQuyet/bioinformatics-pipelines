@@ -1,15 +1,15 @@
 import subprocess
 
-def mapping_and_alignment_BWA_mem(FORWARD, REVERSE, REFERENCE, OUTDIR, SAM_FILE):
+def mapping_and_alignment_BWA_mem(SAMPLE_ID, PLATFORM, FORWARD, REVERSE, REFERENCE, OUTDIR, SAMPLE_OUTDIR, SAM_FILE):
 
-    short_read = f"""
-        /usr/bin/time -v -o {OUTDIR}/runtime.log \
+    command = f"""
+        /usr/bin/time -v -a -o {OUTDIR}/runtime.log \
             bwa mem -t 8 \
-                -R "@RG\\tID:group1\\tLB:lib1\\tPL:illumina\\tPU:unit1\\tSM:sample1" \
+                -R "@RG\\tID:{SAMPLE_ID}\\tLB:lib1\\tPL:{PLATFORM}\\tPU:unit1\\tSM:{SAMPLE_ID}" \
                 {REFERENCE} \
                 {FORWARD} \
                 {REVERSE} \
-            > {OUTDIR}/{SAM_FILE} \
+            > {SAMPLE_OUTDIR}/{SAM_FILE} \
         2>> {OUTDIR}/monitoring.log
     """
-    subprocess.run(short_read, shell=True, check=True)
+    subprocess.run(command, shell=True, check=True)
