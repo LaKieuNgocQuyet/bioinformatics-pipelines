@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+[project]
+name = "variant_analysis_pipeline"
+version = "1.0.0"
+description = "A bioinformatics pipeline for variant calling"
+readme = "README.md"
+requires-python = ">=3.9"
+license = "GPL-3.0"
+license-files = ["LICENSE.txt"]
+authors = [{ name = "Quyet K. N. La", email = "quyetlakn@gmail.com"}]
+keywords = ["NGS", "variant calling", "bioinformatics", "pipeline"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: POSIX :: Linux"
+]
+dependencies = [
+    "pandas",
+    "seaborn"
+]
+[project.urls]
+Repository = "https://github.com/LaKieuNgocQuyet/variant_analysis_pipeline.git"
+Issues = "https://github.com/LaKieuNgocQuyet/variant_analysis_pipeline/issues"
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["modules*"]
