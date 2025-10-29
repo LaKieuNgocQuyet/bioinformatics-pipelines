@@ -1,15 +1,14 @@
 import subprocess
 
-def SNPs_and_Indels_GATK(RECAL_BAM, REFERENCE, OUTDIR, SAMPLE_NAME):
+def SNPs_and_Indels_GATK(RECAL_BAM_FILE, REFERENCE, SAMPLE_OUTDIR, OUTDIR, RAW_GVCF_FILE):
     command = f"""
-        /usr/bin/time -v -o {OUTDIR}/runtime.log \
+        /usr/bin/time -v -a -o {OUTDIR}/runtime.log \
             gatk HaplotypeCaller \
                 --native-pair-hmm-threads 8 \
-                -I {RECAL_BAM} \
+                -I {SAMPLE_OUTDIR}/{RECAL_BAM_FILE} \
                 -R {REFERENCE} \
-                -O {OUTDIR}/{SAMPLE_NAME}.raw.vcf \
-                -ERC GVCF
-                -L /home/lknq/hg19/S07604624_Regions.bed \                
+                -O {SAMPLE_OUTDIR}/{RAW_GVCF_FILE} \
+                -ERC GVCF \
         2>> {OUTDIR}/monitoring.log
     """
     subprocess.run(command, shell=True, check=True)
