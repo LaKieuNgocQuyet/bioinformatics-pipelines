@@ -2,7 +2,7 @@ import subprocess
 
 def markduplicates(SORTED_BAM, OUTDIR, MARKED_BAM):
     command = f"""
-        /usr/bin/time -v \
+        /usr/bin/time -v -o {OUTDIR}/runtime.log\
             gatk MarkDuplicates \
                 -I {OUTDIR}/{SORTED_BAM} \
                 -O {OUTDIR}/{MARKED_BAM} \
