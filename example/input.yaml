@@ -1,0 +1,18 @@
+#Please don't use tab characters for indentation in this file. Use spaces only.
+
+sample:
+  - id: sample1
+    read1: /path/to/sample1_R1.fastq
+    read2: /path/to/sample1_R2.fastq
+  - id: sample2
+    read1: /path/to/sample2_R1.fastq
+    read2: /path/to/sample2_R2.fastq
+    # You can add more samples as needed
+reference: 
+  genome: /path/to/reference_genome.fasta
+  known_site: 
+    - /path/to/known_sites.vcf
+    - /path/to/another_known_sites.vcf
+    # You can add more known sites as needed
+output: 
+  directory: /path/to/output_directory
