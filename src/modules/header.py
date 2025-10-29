@@ -2,3 +2,5 @@ from modules.include.mapping_and_alignment.mapping_and_alignment_BWA_mem import 
 from modules.include.post_mapping_and_alignment.convert_and_sort import convert_and_sort
 from modules.include.variant_calling.SNPs_and_Indels_GATK import SNPs_and_Indels_GATK
 from modules.include.mapping_and_alignment.check_average_read_length import check_average_read_length
+from modules.include.post_mapping_and_alignment.markduplicates import markduplicates
+from modules.include.post_mapping_and_alignment.baserecalibrator_and_applyBQSR import baserecalibrator, applyBQSR
