@@ -63,7 +63,7 @@ for sample in SAMPLES:
         "read2": R2,
         "sample_outdir": SAMPLE_OUTDIR,
         "platform": "illumina",
-        "read_type": READ_TYPE,
+        "read_length_type": READ_TYPE,
         "average_length": AVERAGE_LENGTH,
         "sam_file": f"{ID}.sam",
         "bam_file": f"{ID}.bam",
@@ -80,12 +80,13 @@ logging.info(f"Sample information:\n{yaml.dump(SAMPLE_LIST, sort_keys=False, def
 #             Main pipeline execution                #
 # ================================================== #
 
-# Mapping and Alignment
+# +----------------------------------------------------------------------------------------------------+ #
+# |                                        Mapping and Alignment                                       | #
+# +----------------------------------------------------------------------------------------------------+ #
 for sample_id, info in SAMPLE_LIST.items():
     start_time = time.time()
     logging.info(f"Mapping and alignment sample: {sample_id}")
-
-    if info["read_type"] == "short":
+    if info["read_length_type"] == "short":
         mapping_and_alignment_BWA_mem(
             SAMPLE_ID=sample_id,
             PLATFORM=info["platform"],
@@ -109,13 +110,14 @@ for sample_id, info in SAMPLE_LIST.items():
         )
     end_time = time.time()
     duration = (end_time - start_time) / 60  
-    logging.info(f"{sample_id} finished mapping and alignment in {duration:.2f} minutes\n")
-
-# Post-mapping and Alignment
+    logging.info(f"{sample_id} finished mapping and alignment in {duration:.2f} minutes")
+logging.info("All samples finished mapping and alignment step.")
+# +----------------------------------------------------------------------------------------------------+ #
+# |                                      Post-mapping and Alignment                                    | #
+# +----------------------------------------------------------------------------------------------------+ #
 for sample_id, info in SAMPLE_LIST.items():
     start_time = time.time()
     logging.info(f"Post-mapping and alignment sample: {sample_id}")
-
     convert_and_sort(
         SAMPLE_OUTDIR=info["sample_outdir"],
         SAM_FILE=info["sam_file"],
@@ -144,13 +146,14 @@ for sample_id, info in SAMPLE_LIST.items():
     )  
     end_time = time.time()
     duration = (end_time - start_time) / 60  
-    logging.info(f"{sample_id} finished post-mapping and alignment in {duration:.2f} minutes\n")
-
-# Variant Calling
+    logging.info(f"{sample_id} finished post-mapping and alignment in {duration:.2f} minutes")
+logging.info("All samples finished post-mapping and alignment step.")    
+# +----------------------------------------------------------------------------------------------------+ #
+# |                                           Variant Calling                                          | #
+# +----------------------------------------------------------------------------------------------------+ #
 for sample_id, info in SAMPLE_LIST.items():
     start_time = time.time()
     logging.info(f"Variant calling sample: {sample_id}")
-
     SNPs_and_Indels_GATK(
         RECAL_BAM_FILE=info["recal_bam_file"],
         REFERENCE=REFERENCE,
@@ -160,6 +163,14 @@ for sample_id, info in SAMPLE_LIST.items():
     )
     end_time = time.time()
     duration = (end_time - start_time) / 60  
-    logging.info(f"{sample_id} finished variant calling in {duration:.2f} minutes\n")
+    logging.info(f"{sample_id} finished variant calling in {duration:.2f} minutes")
+GVCF_FILE_LIST = ""
+for sample_id, info in SAMPLE_LIST.items():
+    GVCF_FILE_LIST += f" -V {info['sample_outdir']}/{info['raw_gvcf_file']} "    
+combine_gvcfs(
+    GVCF_FILE_LIST=GVCF_FILE_LIST,
+    REFERENCE=REFERENCE,
+    OUTDIR=OUTDIR
+)
 
 
