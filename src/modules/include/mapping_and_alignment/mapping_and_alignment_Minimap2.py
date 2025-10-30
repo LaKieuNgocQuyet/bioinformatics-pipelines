@@ -1,7 +1,6 @@
 import subprocess
 
 def mapping_and_alignment_Minimap2(SAMPLE_ID, PLATFORM, FORWARD, REVERSE, REFERENCE, OUTDIR, SAMPLE_OUTDIR, SAM_FILE):
-
     command = f"""
         /usr/bin/time -v -o {OUTDIR}/runtime.log \
             minimap2 -x -a \
