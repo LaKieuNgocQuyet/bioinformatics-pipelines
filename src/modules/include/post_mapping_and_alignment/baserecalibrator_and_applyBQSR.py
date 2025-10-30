@@ -1,12 +1,12 @@
 import subprocess
 
-def baserecalibrator(MARKED_BAM_FILE, known_sites_string, REFERENCE, SAMPLE_OUTDIR, OUTDIR):
+def baserecalibrator(MARKED_BAM_FILE, KNOWN_SITES, REFERENCE, SAMPLE_OUTDIR, OUTDIR):
     command = f"""
     /usr/bin/time -v -a -o {OUTDIR}/runtime.log \
         gatk BaseRecalibrator \
             -I {SAMPLE_OUTDIR}/{MARKED_BAM_FILE} \
             -R {REFERENCE} \
-            {known_sites_string} \
+            {KNOWN_SITES} \
             -O {SAMPLE_OUTDIR}/recal_data.table \
     2>> {OUTDIR}/monitoring.log
     """
